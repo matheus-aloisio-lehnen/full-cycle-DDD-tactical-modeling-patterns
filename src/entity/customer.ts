@@ -3,12 +3,12 @@ class Customer {
     private _id: string;
     private _name: string;
     private _address: string = "";
-    private _active: boolean;
+    private _active: boolean = true;
 
-    constructor(id: string, name: string, active: boolean) {
+    constructor(id: string, name: string) {
         this._id = id;
         this._name = name;
-        this._active = true;
+        this.validate();
     }
 
     get id(): string {
@@ -47,6 +47,7 @@ class Customer {
 
     changeName(name:string) {
         this._name = name;
+        this.validate();
     }
 
     activate() {
@@ -57,6 +58,16 @@ class Customer {
         this._active = false;
     }
 
+    validate() {
+        if (this._id.length === 0)
+            throw new Error("ID is required");
+        if (this._name.length === 0)
+            throw new Error("Name is required");
+    }
+
 }
 // Os dados precisam estar consistentes sempre em relação às regras de negócio.
-const customer = new Customer("1", "John", true);
+const customer = new Customer("1", "John");
+
+
+// A Entidade SEMPRE deve se autovalidar
