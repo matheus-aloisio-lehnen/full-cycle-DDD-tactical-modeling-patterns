@@ -2,13 +2,12 @@ class Customer {
 
     private _id: string;
     private _name: string;
-    private _address: string;
+    private _address: string = "";
     private _active: boolean;
 
-    constructor(id: string, name: string, address: string, active: boolean) {
+    constructor(id: string, name: string, active: boolean) {
         this._id = id;
         this._name = name;
-        this._address = address;
         this._active = true;
     }
 
@@ -59,3 +58,5 @@ class Customer {
     }
 
 }
+// Os dados precisam estar consistentes sempre em relação às regras de negócio.
+const customer = new Customer("1", "John", true);
