@@ -1,4 +1,4 @@
-export default class Address {
+export default class AddressEntity {
 
     _street: string;
     _city: string;

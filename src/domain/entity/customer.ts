@@ -1,11 +1,11 @@
 // Complexidade acidental. (Armazenamento e transporte de dados)
-import Address from "./address";
+import AddressEntity from "./address";
 
-class CustomerEntity {
+export default class CustomerEntity {
 
     private _id: string;
     private _name: string;
-    private _address!: Address;
+    private _address!: AddressEntity;
     private _active: boolean = true;
 
     constructor(id: string, name: string) {
@@ -14,13 +14,20 @@ class CustomerEntity {
         this.validate();
     }
 
+    validate() {
+        if (this._id.length === 0)
+            throw new Error("ID is required");
+        if (this._name.length === 0)
+            throw new Error("Name is required");
+    }
+
     changeName(name:string) {
         this._name = name;
         this.validate();
     }
 
     activate() {
-        if(this._address !== undefined)
+        if(this._address === undefined)
             throw new Error("Address is required to activate a customer");
         this._active = true;
     }
@@ -29,15 +36,16 @@ class CustomerEntity {
         this._active = false;
     }
 
-    set Address(address: Address) {
+    isActive(): boolean {
+        return this._active;
+    }
+
+    set Address(address: AddressEntity) {
         this._address = address;
     }
 
-    validate() {
-        if (this._id.length === 0)
-            throw new Error("ID is required");
-        if (this._name.length === 0)
-            throw new Error("Name is required");
+    get name(): string {
+        return this._name;
     }
 
 }
